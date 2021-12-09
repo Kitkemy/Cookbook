@@ -1,0 +1,10 @@
+a{
+color: #202060;
+text-decoration: none;
+} 
+
+
+/* mouse over link */
+a:hover {
+color: #6666cc;
+}

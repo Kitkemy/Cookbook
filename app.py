@@ -38,9 +38,9 @@ def random():
     meal = Meal("random")
     recepie = meal.get_random_data()
 
-    name = recepie['meals'][0]['strMeal']
-    img_url = recepie['meals'][0]['strMealThumb']
+    
     instruction = (recepie['meals'][0]['strInstructions'])
+    instruction = instruction.split('\n')
     print(instruction)
 
     def get_ingredients(recepie):
@@ -57,6 +57,6 @@ def random():
 
     return render_template("recepie.html",
                             recepie = recepie,
+                            instruction = instruction,
                             ingredients=ingredients
                             )
-    #test git
