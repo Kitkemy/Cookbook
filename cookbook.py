@@ -2,30 +2,31 @@ import requests
 import json
 import pprint
 
+MEALDB_API_URL = "http://www.themealdb.com/api/json/v1/1/"
 
     
 class Meal:
     def __init__(self, meal_selection):
         self.meal_selection = meal_selection
-        self.data = self.get_data()
-        self.name = self.get_name()
-        self.img_path = self.get_img_path()
-        self.instruction = self.get_instruction()
-        self.ingredients = self.get_ingredients()
-        self.yt_link = self.get_yt_link()
-        self.area = self.get_area()
-        self.category = self.get_category()
+        #self.data = self.get_data()
+        #self.name = self.get_name()
+        #self.img_path = self.get_img_path()
+        #self.instruction = self.get_instruction()
+        #self.ingredients = self.get_ingredients()
+        #self.yt_link = self.get_yt_link()
+        #self.area = self.get_area()
+        #self.category = self.get_category()
         
-    def get_data(self):
+    '''def get_data(self):
         if self.meal_selection == "random":
             response = self.get_random_data()
         elif self.meal_selection == "id":
             response = self.get_meal_by_id(id)
             #metoda dla category i dalej kolejna po głównym składniku
         return response
-        
+    '''    
     def get_random_data(self):
-            r = requests.get('http://www.themealdb.com/api/json/v1/1/random.php')
+            r = requests.get(f'{MEALDB_API_URL}/random.php')
             response = r.json()
             #pprint.pprint(response)
             return response
@@ -55,16 +56,16 @@ class Meal:
             ingredients[(self.data['meals'][0]['strIngredient'+str(i)])] = [(self.data['meals'][0]['strMeasure'+str(i)])]
         return ingredients
     
-    def get_yt_link(self):
-        yt_link = self.data['meals'][0]['strYoutube']
+    def get_yt_link(self, recepie):
+        yt_link = recepie['meals'][0]['strYoutube']
         return yt_link
     
-    def get_area(self):
-        area = self.data['meals'][0]['strArea']
+    def get_area(self, recepie):
+        area =  recepie['meals'][0]['strArea']
         return area
     
-    def get_category(self):
-        category = self.data['meals'][0]['strCategory']
+    def get_category(self, recepie):
+        category =  recepie['meals'][0]['strCategory']
         return category
 
 
@@ -79,7 +80,7 @@ class Category:
         
         category_list = requests.get('http://www.themealdb.com/api/json/v1/1/list.php?c=list')
         response = category_list.json()
-        pprint.pprint(response)
+        #pprint.pprint(response)
         return self.create_list(response)
 
     
@@ -90,14 +91,14 @@ class Category:
             list.append(category_list['meals'][i]['strCategory'])
         return list
     
-    def get_meals_by_category(self, category):
+    def get_meals_by_category(self, category_name):
         
-        meals_list = requests.get(f'http://www.themealdb.com/api/json/v1/1/filter.php?c={category}')
+        meals_list = requests.get(f'http://www.themealdb.com/api/json/v1/1/filter.php?c={category_name}')
         response = meals_list.json()
-        pprint.pprint(response)
+        #pprint.pprint(response)
         return response
 
-#category = Category()
+category = Category()
 #print(category.category_list)
 '''
 class Areas:
