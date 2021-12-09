@@ -15,24 +15,24 @@
       <div class="card mb-3" >
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="{{ img_url }}" class="img-fluid rounded-start" alt="...">
+            <img src="{{ recepie['meals'][0]['strMealThumb'] }}" class="img-fluid rounded-start" alt="...">
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">{{ name }}</h5>
+              <h5 class="card-title">{{recepie['meals'][0]['strMeal']}}</h5>
               <p class="card-text">
-                {{instruction}}
+                {{recepie['meals'][0]['strInstructions']}}
 
               </p>
               <p class="card-text">
                   <small class="text-muted">
                     <h4>Category</h4>
-                    {{category}}
+                    {{recepie['meals'][0]['strCategory']}}
                 </small></p>
                 <p class="card-text">
                     <small class="text-muted">
                       <h4>Area</h4>
-                      {{area}}
+                      {{recepie['meals'][0]['strCategory']}}
                   </small></p>
                   <p class="card-text">
                     <small class="text-muted">
@@ -45,8 +45,8 @@
       </div>
 
       <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src={{yt_link}} allowfullscreen></iframe>
-        {{yt_link}}
+        <iframe class="embed-responsive-item" src={{recepie['meals'][0]['strYoutube']}} allowfullscreen></iframe>
+        {{recepie['meals'][0]['strYoutube']}}
       </div>
 
 </body>

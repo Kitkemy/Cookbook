@@ -56,11 +56,6 @@ def random():
     category = meal.get_category(recepie)
 
     return render_template("recepie.html",
-                            name=name,
-                            img_url=img_url,
-                            instruction=instruction,
-                            ingredients=ingredients,
-                            yt_link=yt_link,
-                            category=category,
-                            area=area
+                            recepie = recepie,
+                            ingredients=ingredients
                             )
