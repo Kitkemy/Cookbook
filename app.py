@@ -48,6 +48,7 @@ def recepie_by_id(recepie_id):
     instruction = instruction.split('\n')
     print(instruction)
 
+
     def get_ingredients(recepie):
         ingredients = {}
         for i in range(20): 
@@ -57,10 +58,14 @@ def recepie_by_id(recepie_id):
 
     ingredients = get_ingredients(recepie)
 
+    yt_link1 = recepie['meals'][0]['strYoutube']
+    yt_link = yt_link1.replace("watch?v=","embed/")
+
     return render_template("recepie.html",
                             recepie = recepie,
                             instruction = instruction,
-                            ingredients=ingredients
+                            ingredients=ingredients,
+                            yt_link=yt_link
                             )
 
 @app.route('/random')
@@ -83,10 +88,14 @@ def random():
 
     ingredients = get_ingredients(recepie)
 
+    yt_link1 = recepie['meals'][0]['strYoutube']
+    yt_link = yt_link1.replace("watch?v=","embed/")
+
     return render_template("recepie.html",
                             recepie = recepie,
                             instruction = instruction,
-                            ingredients=ingredients
+                            ingredients=ingredients,
+                            yt_link=yt_link
                             )
 
 @app.route('/ingredient/<ingredient_name>')
