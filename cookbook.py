@@ -32,7 +32,7 @@ class Meal:
             return response
     
     def get_meal_by_id(self, id):
-        r = requests.get(f'http://www.themealdb.com/api/json/v1/1/lookup.php?i={id}')
+        r = requests.get(f'{MEALDB_API_URL}/lookup.php?i={id}')
         response = r.json()
         pprint.pprint(response)
         return response
@@ -78,7 +78,7 @@ class Category:
         
     def get_category_list(self):
         
-        category_list = requests.get('http://www.themealdb.com/api/json/v1/1/list.php?c=list')
+        category_list = requests.get(f'{MEALDB_API_URL}/list.php?c=list')
         response = category_list.json()
         #pprint.pprint(response)
         return self.create_list(response)
@@ -93,13 +93,44 @@ class Category:
     
     def get_meals_by_category(self, category_name):
         
-        meals_list = requests.get(f'http://www.themealdb.com/api/json/v1/1/filter.php?c={category_name}')
+        meals_list = requests.get(f'{MEALDB_API_URL}/filter.php?c={category_name}')
         response = meals_list.json()
         #pprint.pprint(response)
         return response
 
 category = Category()
 #print(category.category_list)
+
+
+
+class Ingredients:
+    def __init__(self):
+        #self.list = self.get_ingredients_list()
+        pass 
+
+    def get_ingredients_list(self):
+        
+        ingredients_list = requests.get(f'{MEALDB_API_URL}/list.php?i=list')
+        response = ingredients_list.json()
+        pprint.pprint(response)
+        return self.create_list(response)
+    
+    def get_meals_by_ingredient(self, ingredient):
+        meals_list = requests.get(f'{MEALDB_API_URL}/filter.php?i={ingredient}')
+        response = meals_list.json()
+        pprint.pprint(response)
+        return response
+        
+
+    
+    def create_list(self, ingredients_list):
+        list = []
+        length = len(ingredients_list['meals'])
+        for i in range(length):
+            list.append(ingredients_list['meals'][i]['strIngredient'])
+        return list
+
+
 '''
 class Areas:
     def __init__(self):
@@ -107,7 +138,7 @@ class Areas:
         
     def get_areas_list(self):
         
-        areas_list = requests.get('http://www.themealdb.com/api/json/v1/1/list.php?a=list')
+        areas_list = requests.get('{MEALDB_API_URL}/list.php?a=list')
         response = areas_list.json()
         pprint.pprint(response)
         return self.create_list(response)
@@ -126,7 +157,7 @@ class Ingredients:
         
     def get_ingredients_list(self):
         
-        ingredients_list = requests.get('http://www.themealdb.com/api/json/v1/1/list.php?i=list')
+        ingredients_list = requests.get('{MEALDB_API_URL}/list.php?i=list')
         response = ingredients_list.json()
         pprint.pprint(response)
         return self.create_list(response)

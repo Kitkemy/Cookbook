@@ -63,6 +63,20 @@
               <h4>INGRENDIENT</h4>
               Tell kitty what's inside your fridge and I'll tell you what to do with it 
             </p>
+
+            <form action="/ingredient/{{ingredient}}" method="POST">
+              <div class="mb-3">
+                <label class="form-label">Specify the ingredient</label>
+                <input name="ingredient">
+                
+              </div>
+
+              <div class="col-12">
+                <button class="btn btn-primary" type="submit">Look for meals</button>
+              </div>
+
+            </form>
+
           </div>
         </div>
       </div>

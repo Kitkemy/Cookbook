@@ -1,13 +1,20 @@
-from flask import Flask, render_template
-from .cookbook import Meal, Category
+from flask import Flask, render_template, request
+from requests.api import post
+from .cookbook import Meal, Category, Ingredients, MEALDB_API_URL
 
 app = Flask(__name__)
 
 category = Category()
+ingredients = Ingredients()
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def index():
-    return render_template("index2.html")
+    print(request.form.get('ingredient'))
+    ingredient = request.form.get('ingredient')
+
+    return render_template("index2.html",
+                           ingredient=ingredient
+                            )
 
 @app.route('/category/all')
 #def index(category):
@@ -27,8 +34,7 @@ def category_recepies(category_name):
     recepies = category.get_meals_by_category(category_name)
     #return recepies
     return render_template("ucategory.html",
-                            recepies=recepies,
-                            category = category_name
+                            recepies=recepies
                             )
 
 
@@ -82,3 +88,12 @@ def random():
                             instruction = instruction,
                             ingredients=ingredients
                             )
+
+@app.route('/ingredient/<ingredient_name>')
+def ingrendient(ingredient_name):
+    print('meal by ingrendient chosen')
+    meals_list = ingredients.get_meals_by_ingredient(ingredient_name)
+    return render_template("ucategory.html",
+                            recepies=meals_list
+                            )
+    
