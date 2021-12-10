@@ -8,3 +8,9 @@ text-decoration: none;
 a:hover {
 color: #6666cc;
 }
+
+.btn {
+    text:white;
+    font-weight: bold;
+    background:#202060
+}

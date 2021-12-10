@@ -13,5 +13,17 @@
     
   </head>
   <body>
-      
+    <div class="container-fluid"> 
+        <div class="row align-items-center p-3 ">
+            <div class="d-grid gap-2 col-6 mx-auto">
+                {% for i in categories %}
+                <a class="btn btn-primary p-2" href="/category/{{ i }}" role="button" >{{ i }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>    
+    
+
   </body>
+
+        
