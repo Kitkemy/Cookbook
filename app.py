@@ -7,12 +7,29 @@ app = Flask(__name__)
 category = Category()
 ingredients = Ingredients()
 
+#tutaj zdefiniować funkcje
+def get_ingredients(recepie):
+    ingredients = {}
+    for i in range(1,20):
+        if recepie['meals'][0]['strMeasure'+str(i)].strip():
+            ingredients[(recepie['meals'][0]['strIngredient'+str(i)])] = [(recepie['meals'][0]['strMeasure'+str(i)])]
+    return ingredients
+
 @app.route('/', methods=["GET", "POST"])
 def index():
     print(request.form.get('ingredient'))
     ingredient = request.form.get('ingredient')
 
     return render_template("index2.html",
+                           ingredient=ingredient
+                            )
+
+@app.route('/recepie2', methods=["GET", "POST"])
+def aaa():
+    print(request.form.get('ingredient'))
+    ingredient = request.form.get('ingredient')
+
+    return render_template("recepie2.html",
                            ingredient=ingredient
                             )
 
@@ -48,14 +65,6 @@ def recepie_by_id(recepie_id):
     instruction = instruction.split('\n')
     print(instruction)
 
-
-    def get_ingredients(recepie):
-        ingredients = {}
-        for i in range(20): 
-            i = i + 1
-            ingredients[(recepie['meals'][0]['strIngredient'+str(i)])] = [(recepie['meals'][0]['strMeasure'+str(i)])]
-        return ingredients
-
     ingredients = get_ingredients(recepie)
 
     yt_link1 = recepie['meals'][0]['strYoutube']
@@ -77,14 +86,7 @@ def random():
     
     instruction = (recepie['meals'][0]['strInstructions'])
     instruction = instruction.split('\n')
-    print(instruction)
-
-    def get_ingredients(recepie):
-        ingredients = {}
-        for i in range(20): 
-            i = i + 1
-            ingredients[(recepie['meals'][0]['strIngredient'+str(i)])] = [(recepie['meals'][0]['strMeasure'+str(i)])]
-        return ingredients
+    print(instruction)      
 
     ingredients = get_ingredients(recepie)
 
