@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Index{% endblock %}
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid"> 
+      <div class="row align-items-center p-3 ">
+    
+      <h2>Available meals</h2>
+      
+      <div class="row">
+        {% for i in recepies['meals'] %}
+        <div class="col-sm-3 p-3">
+          <div class="card">
+            <img src="{{ i['strMealThumb'] }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ i['strMeal'] }}</h5>
+              <a href="/id/{{ i['idMeal'] }}" class="btn btn-primary">Let's cook!</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}     
+      </div>
+      </div>
+    </div>
+{% endblock %}       
